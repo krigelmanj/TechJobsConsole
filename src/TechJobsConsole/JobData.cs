@@ -10,7 +10,7 @@ namespace TechJobsConsole
         static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
 
-        public static List<Dictionary<string, string>> FindAll()
+        public static List<Dictionary<string, string>>FindAll()
         {
             LoadData();
             return AllJobs;
@@ -137,6 +137,29 @@ namespace TechJobsConsole
             valueBuilder.Clear();
 
             return rowValues.ToArray();
+        }
+
+        // TODO Will search for a string within all of the collumns.
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                for (int i = 0; i < AllJobs.Length; i++)
+                {
+                    if (row.Contains(value))
+                    {
+                        jobs.Add(row);
+                    }
+                }
+                
+            }
+
+            return jobs;
         }
     }
 }
